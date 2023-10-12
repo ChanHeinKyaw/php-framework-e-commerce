@@ -4,6 +4,6 @@ use App\Routing\RouteDispatcher;
 
 $router = new AltoRouter();
 
-$router->map("GET","/","app\controllers\BaseController@show","Home Route");
+$router->map("GET","/","App\Controllers\IndexController@show","Home Route");
 
 new RouteDispatcher($router);
