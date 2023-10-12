@@ -1,7 +1,8 @@
 <?php
 
+use Illuminate\Database\Capsule\Manager as Capsule;
+
 require_once "../bootstrap/init.php";
 
-echo "<br> URL Root is " . URL_ROOT;
-// echo $_ENV['APP_NAME'];
-// echo $_ENV['APP_ENV'];
+$user = Capsule::table("users")->where('id',1)->get();
+echo "<pre>" . print_r($user,true). "</pre>";
