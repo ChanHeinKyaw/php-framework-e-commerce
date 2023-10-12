@@ -39,6 +39,7 @@ class ComposerStaticInit145c03b04c452b5b08102ae936d13f45
             'Illuminate\\Support\\' => 19,
             'Illuminate\\Filesystem\\' => 22,
             'Illuminate\\Events\\' => 18,
+            'Illuminate\\Database\\' => 20,
             'Illuminate\\Contracts\\' => 21,
             'Illuminate\\Container\\' => 21,
         ),
@@ -122,6 +123,10 @@ class ComposerStaticInit145c03b04c452b5b08102ae936d13f45
         'Illuminate\\Events\\' => 
         array (
             0 => __DIR__ . '/..' . '/illuminate/events',
+        ),
+        'Illuminate\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/database',
         ),
         'Illuminate\\Contracts\\' => 
         array (
