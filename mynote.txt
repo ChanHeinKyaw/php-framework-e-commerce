@@ -1,0 +1,5 @@
+https://packagist.org/ link ကို သွားပြီး phpdotenv package ကို download လုပ်
+သူက env data တွေ ကို loading လုပ်ပေးမှာ 
+‌နောက်ပိုင်းမှာ user တွေ ကို enviroment data ေတွကို ဝှက်ထားပေးပြီး လှမ်း loading လုပ်ချင်ရင်
+dotenv ဆိုတဲ့ file နဲ့ loading လှမ်းလုပ်မှာ
+
