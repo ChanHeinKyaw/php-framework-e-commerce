@@ -3,3 +3,12 @@ https://packagist.org/ link ကို သွားပြီး phpdotenv package
 ‌နောက်ပိုင်းမှာ user တွေ ကို enviroment data ေတွကို ဝှက်ထားပေးပြီး လှမ်း loading လုပ်ချင်ရင်
 dotenv ဆိုတဲ့ file နဲ့ loading လှမ်းလုပ်မှာ
 
+
+<IfModule mod_rewrite.c>  <!-- Rewrite module ကို on ထားလား စစ်တာ -->
+  RewriteEngine On 
+
+  RewriteCond ${REQUEST_FILENAME} !-d   <!-- RewriteCond က directroy မဖြစ်ရဘူး -->
+  RewriteCond ${REQUEST_FILENAME} !-f   <!-- RewriteCond က file မဖြစ်ရဘူး -->
+
+  RewriteRule . index.php [L]  <!-- ဘယ်တန်ဖိုး ပဲ လာလာ index.php ကို ပို့မယ် လို့ ပြောလိုက်တာ -->
+</IfModule>
