@@ -1,13 +1,9 @@
 <?php
 
+use App\Routing\RouteDispatcher;
+
 $router = new AltoRouter();
 
-$router->map("GET","/public","","Home Route");
+$router->map("GET","/","BaseController@index","Home Route");
 
-$match = $router->match();
-
-if($match){
-    echo "Match";
-}else{
-    echo "Not Match";
-}
+new RouteDispatcher($router);
