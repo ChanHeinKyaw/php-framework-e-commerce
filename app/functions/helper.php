@@ -24,3 +24,9 @@ function make($filename,$data){
 function beautify($data){
     echo "<pre>". print_r($data,true) . "</pre>";
 }
+
+function asset($link = null){
+    $assetLink = URL_ROOT . '/assets/' . $link;
+    
+    return $assetLink;
+}
