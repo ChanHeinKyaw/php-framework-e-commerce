@@ -20,3 +20,7 @@ function make($filename,$data){
 
     return $content;
 }
+
+function beautify($data){
+    echo "<pre>". print_r($data,true) . "</pre>";
+}
