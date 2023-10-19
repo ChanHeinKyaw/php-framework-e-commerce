@@ -12,7 +12,8 @@
         "altorouter/altorouter": "^2.0",
         "philo/laravel-blade": "^3.1",
         "illuminate/database": "^5.5",
-        "phpmailer/phpmailer": "^6.8"
+        "phpmailer/phpmailer": "^6.8",
+        "filp/whoops": "^2.15"
     },
     "config": {
         "allow-plugins": {
