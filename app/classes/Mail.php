@@ -29,11 +29,10 @@ class Mail
         $this->mail->FromName = "Brighter Myanmar";
     }
 
-    public function send(){
-        $body = "While installing the entire package manually or with Composer is simple, convenient, and reliable, you may want to include only vital files in your project.";
-        $this->mail->addAddress("scm.chanheinkyaw@gmail.com","Chan Hein Kyaw");
-        $this->mail->Subject = "New Mail Testing For E-Commerce Project";
-        $this->mail->Body = $body;
+    public function send($data){
+        $this->mail->addAddress($data['to'],$data['to_name']);
+        $this->mail->Subject = $data['subject'];
+        $this->mail->Body = make($data['filename'], $data);
 
         return $this->mail->send();
     }

@@ -9,3 +9,14 @@ function view($path, $data=[]){
     $blade = new Blade($view, $cache);
     echo $blade->view()->make($path)->render();
 }
+
+function make($filename,$data){
+    extract($data);
+
+    ob_start();
+        require_once APP_ROOT . "/resources/views/mails/" . $filename . ".php";
+        $content = ob_get_contents();
+    ob_end_clean();
+
+    return $content;
+}
