@@ -13,6 +13,7 @@ $data = [
     'content' => $content,
     'subject' => "New Mail Testing For E-Commerce Project",
     'filename' => "welcome",
+    'img_link' => "https://scontent.frgn12-1.fna.fbcdn.net/v/t39.30808-6/327120071_668374561746063_2743338393680582325_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=F3lMcyzbQWQAX8Ed4J-&_nc_ht=scontent.frgn12-1.fna&oh=00_AfDcAJCgLkEkNA4G64PJhP4B9BY0CEkNCDGZJ_QtxDPboQ&oe=6536627D",
 ];
 
 if($mailer->send($data))
