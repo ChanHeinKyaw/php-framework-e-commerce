@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Classes\Request;
+use App\Classes\CSRFToken;
 
 class CategoryController
 {
@@ -11,7 +12,11 @@ class CategoryController
     }
 
     public function store(){
-        beautify(Request::old('post','name'));
-        echo "I am store methods of " . __CLASS__ . " class";
+        $post = Request::get("post");
+        if(CSRFToken::checkToken($post->token)){
+            echo "Authenticated Token";
+        }else{
+            echo "CSRF Attack Occur";
+        }
     }
 }

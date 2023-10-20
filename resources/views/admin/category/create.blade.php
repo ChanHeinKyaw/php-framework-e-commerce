@@ -13,7 +13,8 @@
               <label for="file">File</label>
               <input type="file" class="form-control rounded-0" id="file" name="file">
             </div>
-            
+
+            <input type="hidden" name="token" value="<?php \App\Classes\CSRFToken::_token() ?>">
             <div class="row justify-content-end no-gutters mt-3">
                 <button type="submit" class="btn btn-primary">create</button>
             </div>

@@ -6,8 +6,8 @@ use App\Classes\Session;
 require_once "../bootstrap/init.php";
 
 // Session::add('name','Testing');
-Session::flash('create_success','Category Created Successfully!');
-Session::flash('create_success');
+// Session::flash('create_success','Category Created Successfully!');
+// Session::flash('create_success');
 
 // $mailer = new Mail();
 
