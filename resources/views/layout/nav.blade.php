@@ -1,6 +1,9 @@
 <div class="container-fluid bg-dark">
     <nav class="container navbar navbar-expand-lg navbar-light bg-faded">
-        <a class="navbar-brand text-white" href="/">Navbar</a>
+        <a class="navbar-brand text-white" href="/">
+          <img src="{{ asset('images/coder.png') }}" alt="" width="30" height="30" class="rounded">
+          <span class="ml-3">Online Shopping</span>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa fa-list text-white"></i>
         </button>
@@ -11,10 +14,10 @@
               <a class="nav-link text-white" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">Pricing</a>
+              <a class="nav-link text-white" href="/admin">Admin Panel</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="/admin/category/create">Category</a>
+                <a class="nav-link text-white" href="#">Pricing</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
