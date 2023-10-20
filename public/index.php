@@ -1,8 +1,12 @@
 <?php
 
 use App\Classes\Mail;
+use App\Classes\Session;
 
 require_once "../bootstrap/init.php";
+
+Session::add('name','Testing');
+echo $_SESSION['name'];
 
 // $mailer = new Mail();
 
