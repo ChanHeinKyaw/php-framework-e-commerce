@@ -27,13 +27,26 @@ class UploadFile
 
     public function isImage($file){
         $ext = pathinfo($file->file->name, PATHINFO_EXTENSION);
-        $validExt = ["jpb","jpeg","png","bmp","gif"];
+        $validExt = ["jpg","jpeg","png","bmp","gif"];
 
         return in_array($ext, $validExt);
     }
 
     public function move($file, $file_name = ""){
         $this->setName($file);
-        return $this->checkSize($file);
+        if($this->isImage($file)){
+            if(!$this->checkSize($file)){
+                $path = APP_ROOT . "/public/assets/uploads/";
+                if(!is_dir($path)){
+                    mkdir($path);
+                }
+                $file_path = $path . $this->getName();
+                return move_uploaded_file($file->file->tmp_name, $file_path);
+            }else{
+                echo "File size exceeded!";
+            }
+        }else{
+            return "Only Image File are accepted!";
+        }
     }
 }
