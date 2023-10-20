@@ -5,7 +5,7 @@ use App\Classes\Session;
 
 require_once "../bootstrap/init.php";
 
-Session::remove('token');
+// Session::remove('token');
 // Session::flash('create_success','Category Created Successfully!');
 // Session::flash('create_success');
 
