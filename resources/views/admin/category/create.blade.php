@@ -4,7 +4,10 @@
 <div class="container my-5">
     <h1 class="text-primary text-center">Create Category</h1>
     <div class="col-md-8 offset-md-2">
-        <form action="/admin/category" autocomplete="off" method="POST" enctype="multipart/form-data">
+      @if(\App\Classes\Session::has("error"))
+          <?php \App\Classes\Session::flash("error") ?>
+      @endif
+        <form action="/admin/category/create" autocomplete="off" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="name">Category Name</label>
               <input type="name" class="form-control rounded-0" id="name" name="name">

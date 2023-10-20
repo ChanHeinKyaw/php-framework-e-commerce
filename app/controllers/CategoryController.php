@@ -2,6 +2,8 @@
 namespace App\Controllers;
 
 use App\Classes\Request;
+use App\Classes\Session;
+use App\Classes\Redirect;
 use App\Classes\CSRFToken;
 
 class CategoryController
@@ -16,7 +18,8 @@ class CategoryController
         if(CSRFToken::checkToken($post->token)){
             echo "Authenticated Token";
         }else{
-            echo "CSRF Attack Occur";
+            Session::flash("error","CSRF Field Error!");
+            Redirect::back();
         }
     }
 }
