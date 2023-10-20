@@ -1,6 +1,8 @@
 <?php
 namespace App\Controllers;
 
+use App\Classes\Request;
+
 class CategoryController
 {
 
@@ -9,7 +11,7 @@ class CategoryController
     }
 
     public function store(){
-        beautify($_POST);
+        beautify(Request::old('post','name'));
         echo "I am store methods of " . __CLASS__ . " class";
     }
 }
