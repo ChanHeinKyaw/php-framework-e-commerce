@@ -2,8 +2,14 @@
 
 use App\Classes\Mail;
 use App\Classes\Session;
+use App\Classes\ValidateRequest;
 
 require_once "../bootstrap/init.php";
+
+$validate = new ValidateRequest();
+$col = $validate->mixed('email','mgmg@gmail.com','5');
+
+var_dump($col);
 
 // Session::remove('token');
 // Session::flash('create_success','Category Created Successfully!');
