@@ -8,9 +8,7 @@
         @include("layout.admin_sidebar")
       </div>
       <div class="col-md-8">
-        @if(\App\Classes\Session::has("error"))
-            <?php \App\Classes\Session::flash("error") ?>
-        @endif
+          @include('layout.report_message')
           <form action="/admin/category/create" autocomplete="off" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="name">Category Name</label>

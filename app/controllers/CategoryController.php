@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Classes\Redirect;
 use App\Classes\CSRFToken;
 use App\Classes\UploadFile;
+use App\Classes\ValidateRequest;
 
 class CategoryController
 {
@@ -19,10 +20,19 @@ class CategoryController
     public function store(){
         $post = Request::get("post");
         if(CSRFToken::checkToken($post->token)){
-            beautify(Request::get('file'));
-            echo "<hr>";
-            $uploadFile = new UploadFile();
-            var_dump($uploadFile->move(Request::get('file')));
+            $rules = [
+                "name" => ["required" => true, "minLength" => "5", "unique" => "categories"]
+            ];
+
+            $validator = new ValidateRequest();
+            $validator->checkValidate($post, $rules);
+            if($validator->hasError()){
+                $categories = Category::all();
+                $errors = $validator->getErrors();
+                view('admin/category/create',compact('categories', 'errors'));
+            }else{
+                echo "Good To Go!";
+            }
         }else{
             Session::flash("error","CSRF Field Error!");
             Redirect::back();
