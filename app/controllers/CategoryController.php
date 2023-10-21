@@ -6,15 +6,15 @@ use App\Classes\Session;
 use App\Models\Category;
 use App\Classes\Redirect;
 use App\Classes\CSRFToken;
-use App\Classes\UploadFile;
 use App\Classes\ValidateRequest;
 
 class CategoryController
 {
-
     public function create(){
-        $categories = Category::all();
-        view('admin/category/create',compact('categories'));
+        $datas = Category::all()->count();
+        list($categories, $pages) = paginate(2, $datas, new Category());
+        $categories = json_decode(json_encode($categories));
+        view('admin/category/create',compact('categories', 'pages'));
     }
 
     public function store(){
