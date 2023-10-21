@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Classes\Request;
 use App\Classes\Session;
+use App\Models\Category;
 use App\Classes\Redirect;
 use App\Classes\CSRFToken;
 use App\Classes\UploadFile;
@@ -11,7 +12,8 @@ class CategoryController
 {
 
     public function create(){
-        view('admin/category/create');
+        $categories = Category::all();
+        view('admin/category/create',compact('categories'));
     }
 
     public function store(){

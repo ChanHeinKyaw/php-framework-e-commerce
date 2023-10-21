@@ -7,7 +7,7 @@ function view($path, $data=[]){
     $cache = APP_ROOT . '/bootstrap/cache';
 
     $blade = new Blade($view, $cache);
-    echo $blade->view()->make($path)->render();
+    echo $blade->view()->make($path, $data)->render();
 }
 
 function make($filename,$data){

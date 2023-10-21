@@ -6,26 +6,26 @@ use App\Classes\ValidateRequest;
 
 require_once "../bootstrap/init.php";
 
-$post = [
-    "name" => "Mg mg",
-    "age"  => 2,
-    "email" => "mgmg@gmail.com",
-];
+// $post = [
+//     "name" => "Mg mg",
+//     "age"  => 2,
+//     "email" => "mgmg@gmail.com",
+// ];
 
-$policies = [
-    "name" => ["string" => true, "minLength" => "5"],
-    "age"  => ["email" => true, "minLength" => "2"],
-    "email" => ["email" => true, "maxLength" => "25"],
-];
+// $policies = [
+//     "name" => ["string" => true, "minLength" => "5"],
+//     "age"  => ["email" => true, "minLength" => "2"],
+//     "email" => ["email" => true, "maxLength" => "25"],
+// ];
 
-$validator = new ValidateRequest();
-$validator->checkValidate($post,$policies);
+// $validator = new ValidateRequest();
+// $validator->checkValidate($post,$policies);
 
-if($validator->hasError()){
-    beautify($validator->getErrors());
-}else{
-    echo "Good to go!";
-}
+// if($validator->hasError()){
+//     beautify($validator->getErrors());
+// }else{
+//     echo "Good to go!";
+// }
 
 
 // Session::remove('token');
