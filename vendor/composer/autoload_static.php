@@ -34,6 +34,7 @@ class ComposerStaticInit145c03b04c452b5b08102ae936d13f45
             'Psr\\SimpleCache\\' => 16,
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
+            'Psr\\Clock\\' => 10,
             'PhpOption\\' => 10,
             'Philo\\Blade\\' => 12,
             'PHPMailer\\PHPMailer\\' => 20,
@@ -57,6 +58,10 @@ class ComposerStaticInit145c03b04c452b5b08102ae936d13f45
             'Dotenv\\' => 7,
             'Doctrine\\Inflector\\' => 19,
             'Doctrine\\Common\\Inflector\\' => 26,
+        ),
+        'C' => 
+        array (
+            'Carbon\\' => 7,
         ),
         'A' => 
         array (
@@ -108,6 +113,10 @@ class ComposerStaticInit145c03b04c452b5b08102ae936d13f45
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'Psr\\Clock\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/clock/src',
         ),
         'PhpOption\\' => 
         array (
@@ -165,23 +174,13 @@ class ComposerStaticInit145c03b04c452b5b08102ae936d13f45
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
         ),
+        'Carbon\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
-        ),
-    );
-
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/nesbot/carbon/src',
-    );
-
-    public static $prefixesPsr0 = array (
-        'U' => 
-        array (
-            'UpdateHelper\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/kylekatarnls/update-helper/src',
-            ),
         ),
     );
 
@@ -200,8 +199,6 @@ class ComposerStaticInit145c03b04c452b5b08102ae936d13f45
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit145c03b04c452b5b08102ae936d13f45::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit145c03b04c452b5b08102ae936d13f45::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit145c03b04c452b5b08102ae936d13f45::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit145c03b04c452b5b08102ae936d13f45::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit145c03b04c452b5b08102ae936d13f45::$classMap;
 
         }, null, ClassLoader::class);
