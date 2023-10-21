@@ -31,7 +31,19 @@ class CategoryController
                 $errors = $validator->getErrors();
                 view('admin/category/create',compact('categories', 'errors'));
             }else{
-                echo "Good To Go!";
+                $slug = slug($post->name);
+                $con = Category::create([
+                'name' => $post->name,
+                    'slug' => $slug,
+                ]);
+
+                if($con){
+                    $categories = Category::all();
+                    $success = "Category Created Successfully!";
+                    view('admin/category/create',compact('categories','success'));
+                }else{
+                    echo "Category Created Fail!";
+                }
             }
         }else{
             Session::flash("error","CSRF Field Error!");
