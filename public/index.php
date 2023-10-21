@@ -6,6 +6,10 @@ use App\Classes\ValidateRequest;
 
 require_once "../bootstrap/init.php";
 
+$value = "Languge@# Electronic";
+
+echo slug($value);
+
 // $post = [
 //     "name" => "Mg mg",
 //     "age"  => 2,
