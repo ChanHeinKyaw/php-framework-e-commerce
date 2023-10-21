@@ -6,10 +6,27 @@ use App\Classes\ValidateRequest;
 
 require_once "../bootstrap/init.php";
 
-$validate = new ValidateRequest();
-$col = $validate->mixed('email','mgmg@gmail.com','5');
+$post = [
+    "name" => "Mg mg",
+    "age"  => 2,
+    "email" => "mgmg@gmail.com",
+];
 
-var_dump($col);
+$policies = [
+    "name" => ["string" => true, "minLength" => "5"],
+    "age"  => ["email" => true, "minLength" => "2"],
+    "email" => ["email" => true, "maxLength" => "25"],
+];
+
+$validator = new ValidateRequest();
+$validator->checkValidate($post,$policies);
+
+if($validator->hasError()){
+    beautify($validator->getErrors());
+}else{
+    echo "Good to go!";
+}
+
 
 // Session::remove('token');
 // Session::flash('create_success','Category Created Successfully!');

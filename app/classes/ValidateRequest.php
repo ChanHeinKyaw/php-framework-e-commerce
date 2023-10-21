@@ -19,6 +19,35 @@ class ValidateRequest
         'mixed' => 'The :attribute field only accept [A-Za-z0-9.$@] characters',
     ];
 
+    public function checkValidate($data, $policies){
+        foreach($data as $column => $value){
+            if(in_array($column, array_keys($policies))){
+                $this->doValidation([
+                    'column' => $column,
+                    'value'  => $value,
+                    'policies' => $policies[$column],
+                ]);
+            }
+        }
+    }
+
+    public function doValidation($data){
+        $column = $data["column"];
+        foreach($data["policies"] as $rule => $policy){
+            $valid = call_user_func_array([self::class, $rule], [$column, $data["value"], $policy]);
+            if(!$valid){
+                $this->setError(
+                    str_replace(
+                        [":attribute", ":policy"],
+                        [$column, $policy],
+                        $this->error_messages[$rule],
+                    ),
+                    $column,
+                );
+            }
+        }
+    }
+
     public function unique($column, $value, $policy){
         if($value != null && !empty(trim($value))){
             return Capsule::table($policy)->where($column, $value)->exists();
@@ -81,7 +110,7 @@ class ValidateRequest
         return count($this->errors) > 0 ? true : false;
     }
     
-    public function getErros(){
+    public function getErrors(){
         return $this->errors;
     }
 
