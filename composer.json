@@ -14,7 +14,8 @@
         "illuminate/database": "^5.5",
         "phpmailer/phpmailer": "^6.8",
         "filp/whoops": "^2.15",
-        "nesbot/carbon": "^2.71"
+        "nesbot/carbon": "^2.71",
+        "voku/pagination": "^4.0"
     },
     "config": {
         "allow-plugins": {
