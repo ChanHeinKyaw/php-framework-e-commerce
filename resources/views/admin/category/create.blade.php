@@ -9,6 +9,12 @@
       </div>
       <div class="col-md-8">
           @include('layout.report_message')
+          @if(\App\Classes\Session::has('delete_success'))
+            <?php \App\Classes\Session::flash('delete_success') ?>
+          @endif
+          @if(\App\Classes\Session::has('delete_fail'))
+            <?php \App\Classes\Session::flash('delete_fail') ?>
+          @endif
           <form action="/admin/category/create" autocomplete="off" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="name">Category Name</label>
@@ -25,7 +31,9 @@
                   <a href="/admin/category">{{ $category->name }}</a>
                   <span class="float-right">
                     <i class="fa fa-edit text-warning"></i>
-                    <i class="fa fa-trash text-danger ml-2"></i>
+                    <a href="/admin/category/{{ $category->id }}/delete">
+                      <i class="fa fa-trash text-danger ml-2"></i>
+                    </a>
                   </span>
               </li>
             @endforeach

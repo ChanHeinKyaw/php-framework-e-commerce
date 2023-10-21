@@ -50,4 +50,16 @@ class CategoryController
             Redirect::back();
         }
     }
+
+    public function delete($id){
+        $con = Category::destroy($id);
+
+        if($con){
+            Session::flash('delete_success', 'Category Delete Successfully!');
+            Redirect::to('/admin/category/create');
+        }else{
+            Session::flash('delete_fail', 'Category Delete Fail!');
+            Redirect::to('/admin/category/create');
+        }
+    }
 }
