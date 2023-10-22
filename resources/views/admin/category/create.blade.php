@@ -37,7 +37,7 @@
               <li class="list-group-item rounded-0">
                   <a href="/admin/category">{{ $category->name }}</a>
                   <span class="float-right">
-                    <i class="fa fa-edit text-warning"></i>
+                    <i class="fa fa-edit text-warning" onclick="showEditModal('{{ $category->name }}','{{ $category->id }}')"></i>
                     <a href="/admin/category/{{ $category->id }}/delete">
                       <i class="fa fa-trash text-danger ml-2"></i>
                     </a>
@@ -50,4 +50,51 @@
       </div>
     </div>
 </div>
+{{-- Modal Start --}}
+<div class="modal" tabindex="-1" id="edit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Category Name</label>
+            <input type="name" class="form-control rounded-0" id="edit-name">
+          </div>
+          <input type="hidden" id="edit-token" value="<?php \App\Classes\CSRFToken::_token() ?>">
+          <input type="hidden" id="edit-id">
+
+          <div class="row justify-content-end no-gutters mt-3">
+              <button class="btn btn-primary" onclick="startEdit(event)">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- Modal End --}}
+@endsection
+
+@section('script')
+  <script>
+      function showEditModal(name,id){
+        $("#edit-name").val(name);
+        $("#edit-id").val(id);
+        $("#edit-modal").modal('show');
+      }
+
+      function startEdit(e){
+        e.preventDefault();
+        let name = $("#edit-name").val();
+        let id = $("#edit-id").val();
+        let token = $("#edit-token").val();
+
+        console.log(name,id,token)
+      }
+  </script>
 @endsection
