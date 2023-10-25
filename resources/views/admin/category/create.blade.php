@@ -37,9 +37,10 @@
               <li class="list-group-item rounded-0">
                   <a href="/admin/category">{{ $category->name }}</a>
                   <span class="float-right">
-                    <i class="fa fa-edit text-warning" onclick="showEditModal('{{ $category->name }}','{{ $category->id }}')"></i>
+                    <i class="fa fa-plus text-primary" style="cursor: pointer" onclick="showSubCatModel('{{ $category->name }}','{{ $category->id }}')"></i>
+                    <i class="fa fa-edit text-warning mx-2" style="cursor: pointer" onclick="showEditModal('{{ $category->name }}','{{ $category->id }}')"></i>
                     <a href="/admin/category/{{ $category->id }}/delete">
-                      <i class="fa fa-trash text-danger ml-2"></i>
+                      <i class="fa fa-trash text-danger"></i>
                     </a>
                   </span>
               </li>
@@ -79,6 +80,43 @@
   </div>
 </div>
 {{-- Modal End --}}
+
+{{-- Sub Category Modal Start --}}
+<div class="modal" tabindex="-1" id="sub-category-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="name">Parent Category Name</label>
+            <div id="error-message" class="py-2 text-danger"></div>
+            <input type="name" class="form-control rounded-0" id="parent-cat-name">
+          </div>
+          <input type="hidden" id="parent-cat-id">
+
+          <div class="form-group">
+            <label for="name">Sub Category Name</label>
+            <div id="error-message" class="py-2 text-danger"></div>
+            <input type="name" class="form-control rounded-0" id="sub-cat-name">
+          </div>
+          <input type="hidden" id="sub-cat-token" value="<?php \App\Classes\CSRFToken::_token() ?>">
+
+          <div class="row justify-content-end no-gutters mt-3">
+              <button class="btn btn-primary" onclick="createSubCategory(event)">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- Sub Category Modal End --}}
 @endsection
 
 @section('script')
@@ -111,6 +149,21 @@
           let res = JSON.parse(response.responseText);
           $("#error-message").html(res.name);
         });
+      }
+
+      function showSubCatModel(name,id){
+          $("#parent-cat-name").val(name);
+          $("#parent-cat-id").val(id);
+          $("#sub-category-modal").modal("show");
+      }
+
+      function createSubCategory(event){
+          event.preventDefault();
+          let name = $("#sub-cat-name").val();
+          let token = $("#sub-cat-token").val();
+          let parent_cat_id = $("#parent-cat-id").val();
+
+          console.log(name,token,parent_cat_id);
       }
   </script>
 @endsection
