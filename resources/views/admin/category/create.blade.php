@@ -94,7 +94,19 @@
         let id = $("#edit-id").val();
         let token = $("#edit-token").val();
 
-        console.log(name,id,token)
+        $.ajax({
+          type: 'POST',
+          url : '/admin/category/update',
+          data: {
+            name: name,
+            token: token,
+            id: id,
+          }
+        }).done(function(response) {
+          console.log(response);
+        }).fail(function(response){
+          console.log(response);
+        })
       }
   </script>
 @endsection
