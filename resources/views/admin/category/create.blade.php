@@ -64,6 +64,7 @@
         <form>
           <div class="form-group">
             <label for="name">Category Name</label>
+            <div id="error-message" class="py-2 text-danger"></div>
             <input type="name" class="form-control rounded-0" id="edit-name">
           </div>
           <input type="hidden" id="edit-token" value="<?php \App\Classes\CSRFToken::_token() ?>">
@@ -103,10 +104,13 @@
             id: id,
           }
         }).done(function(response) {
-          console.log(response);
-        }).fail(function(response){
-          console.log(response);
-        })
+          let res = JSON.parse(response);
+          alert(res.success);
+          window.location.href = "/admin/category/create";
+        }).fail(function(response) {
+          let res = JSON.parse(response.responseText);
+          $("#error-message").html(res.name);
+        });
       }
   </script>
 @endsection

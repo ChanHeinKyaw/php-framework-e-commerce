@@ -66,13 +66,6 @@ class CategoryController
     public function update(){
         $post = Request::get('post');
 
-        $data = [
-            "id" => $post->id,
-            "name" => $post->name,
-            "token" => $post->token,
-            "con" => "",
-        ];
-
         if(CSRFToken::checkToken($post->token)){
             $rules = [
                 "name" => ["required" => true, "minLength" => "5", "unique" => "categories"]
@@ -81,16 +74,15 @@ class CategoryController
             $validator = new ValidateRequest();
             $validator->checkValidate($post, $rules);
             if($validator->hasError()){
-                $data["con"] = "Validation Error!";
-                echo json_encode($data);
+                http_response_code(422);
+                echo json_encode($validator->getErrors());
             }else{
                 Category::where("id", $post->id)->update(['name' => $post->name]);
-                $data["con"] = "We are good to go!";
-                echo json_encode($data);
+                echo json_encode(["success" => "Category Created Successfully!"]);
             }
         }else{
-            $data["con"] = "Token Miss Match Exception";
-            echo json_encode($data);
+            http_response_code(422);
+            echo json_encode(["error" => "Token Miss Match Exception"]);
         }
     }
 }
