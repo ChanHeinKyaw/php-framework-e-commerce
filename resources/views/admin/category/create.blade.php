@@ -163,7 +163,26 @@
           let token = $("#sub-cat-token").val();
           let parent_cat_id = $("#parent-cat-id").val();
 
-          console.log(name,token,parent_cat_id);
+          $("#sub-category-modal").modal("hide");
+
+          $.ajax({
+          type: 'POST',
+          url : '/admin/subcategory/create',
+          data: {
+            name: name,
+            token: token,
+            parent_cat_id: parent_cat_id,
+          }
+        }).done(function(response) {
+          console.log(response);
+          // let res = JSON.parse(response);
+          // alert(res.success);
+          // window.location.href = "/admin/category/create";
+        }).fail(function(response) {
+          console.log(response);
+          // let res = JSON.parse(response.responseText);
+          // $("#error-message").html(res.name);
+        });
       }
   </script>
 @endsection

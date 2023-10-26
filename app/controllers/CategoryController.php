@@ -80,13 +80,16 @@ class CategoryController
             if($validator->hasError()){
                 http_response_code(422);
                 echo json_encode($validator->getErrors());
+                exit;
             }else{
                 Category::where("id", $post->id)->update(['name' => $post->name]);
                 echo json_encode(["success" => "Category Created Successfully!"]);
+                exit;
             }
         }else{
             http_response_code(422);
             echo json_encode(["error" => "Token Miss Match Exception"]);
+            exit;
         }
     }
 }
