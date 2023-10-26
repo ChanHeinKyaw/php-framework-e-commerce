@@ -1,13 +1,6 @@
 @extends('layout.master')
 @section('title','Category Create')
 @section('content')
-<style>
-  .pagination > li {
-    padding: 5px 15px;
-    background: #ddd;
-    margin-right: 1px;
-  }
-</style>
 <div class="container my-5">
     <h1 class="text-primary text-center">Create Category</h1>
     <div class="row">

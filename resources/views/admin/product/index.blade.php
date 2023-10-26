@@ -7,7 +7,6 @@
                 @include('layout.admin_sidebar')
             </div>
             <div class="col-md-8">
-                <h1>Product Index</h1>
                 @if(App\Classes\Session::has("product_insert_success"))
                     <?php App\Classes\Session::flash("product_insert_success") ?>
                 @endif
@@ -38,7 +37,11 @@
                         </tbody>
                     </table>
                 {{-- Table End --}}
+                <div class="mt-5 d-flex justify-content-center">
+                    {!! $pages !!}
+                </div>
             </div>
+
         </div>
     </div>
 @endsection

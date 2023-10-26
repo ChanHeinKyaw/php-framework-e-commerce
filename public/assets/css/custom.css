@@ -1,0 +1,5 @@
+.pagination > li {
+    padding: 5px 15px;
+    background: #ddd;
+    margin-right: 1px;
+  }

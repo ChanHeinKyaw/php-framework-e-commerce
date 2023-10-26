@@ -15,8 +15,10 @@ use App\Classes\ValidateRequest;
 class ProductController
 {
     public function index(){
-        $products = Product::all();
-        view('admin/product/index', compact('products'));
+        $datas = Product::all()->count();
+        list($products, $pages) = paginate(4, $datas, new Product());
+        $products = json_decode(json_encode($products));
+        view('admin/product/index', compact('products', 'pages'));
     }
 
     public function create(){
