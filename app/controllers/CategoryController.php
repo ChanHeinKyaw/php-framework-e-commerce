@@ -6,6 +6,7 @@ use App\Classes\Session;
 use App\Models\Category;
 use App\Classes\Redirect;
 use App\Classes\CSRFToken;
+use App\Models\SubCategory;
 use App\Classes\ValidateRequest;
 
 class CategoryController
@@ -14,7 +15,10 @@ class CategoryController
         $datas = Category::all()->count();
         list($categories, $pages) = paginate(2, $datas, new Category());
         $categories = json_decode(json_encode($categories));
-        view('admin/category/create',compact('categories', 'pages'));
+        $sub_categories = SubCategory::all()->count();
+        list($sub_categories, $sub_pages) = paginate(2, $sub_categories, new SubCategory());
+        $sub_cats = json_decode(json_encode($sub_categories));
+        view('admin/category/create',compact('categories', 'pages','sub_cats', 'sub_pages'));
     }
 
     public function store(){

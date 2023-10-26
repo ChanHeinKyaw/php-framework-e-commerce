@@ -32,6 +32,7 @@
                 <button type="submit" class="btn btn-primary">create</button>
             </div>
           </form>
+          {{-- Category Content Start --}}
           <ul class="list-group mt-5">
             @foreach($categories as $category)
               <li class="list-group-item rounded-0">
@@ -46,8 +47,30 @@
               </li>
             @endforeach
           </ul>
-          <div class="mt-5"></div>
-          {!! $pages !!}
+          <div class="mt-2 d-flex justify-content-center">
+            {!! $pages !!}
+          </div>
+          {{-- Category Content End --}}
+          
+          {{-- Sub Category Content Start --}}
+          <ul class="list-group mt-5">
+            @foreach($sub_cats as $category)
+              <li class="list-group-item rounded-0">
+                  <a href="/admin/category">{{ $category->name }}</a>
+                  <span class="float-right">
+                    <i class="fa fa-plus text-primary" style="cursor: pointer" onclick="showSubCatModel('{{ $category->name }}','{{ $category->id }}')"></i>
+                    <i class="fa fa-edit text-warning mx-2" style="cursor: pointer" onclick="showEditModal('{{ $category->name }}','{{ $category->id }}')"></i>
+                    <a href="/admin/category/{{ $category->id }}/delete">
+                      <i class="fa fa-trash text-danger"></i>
+                    </a>
+                  </span>
+              </li>
+            @endforeach
+          </ul>
+          <div class="mt-2 d-flex justify-content-center">
+            {!! $sub_pages !!}
+          </div>
+          {{-- Sub Category Content End --}}
       </div>
     </div>
 </div>
@@ -103,7 +126,7 @@
 
           <div class="form-group">
             <label for="name">Sub Category Name</label>
-            <div id="error-message" class="py-2 text-danger"></div>
+            <div id="sub-error-message" class="py-2 text-danger"></div>
             <input type="name" class="form-control rounded-0" id="sub-cat-name">
           </div>
           <input type="hidden" id="sub-cat-token" value="<?php \App\Classes\CSRFToken::_token() ?>">
@@ -163,8 +186,6 @@
           let token = $("#sub-cat-token").val();
           let parent_cat_id = $("#parent-cat-id").val();
 
-          $("#sub-category-modal").modal("hide");
-
           $.ajax({
           type: 'POST',
           url : '/admin/subcategory/create',
@@ -174,14 +195,12 @@
             parent_cat_id: parent_cat_id,
           }
         }).done(function(response) {
-          console.log(response);
-          // let res = JSON.parse(response);
-          // alert(res.success);
-          // window.location.href = "/admin/category/create";
+          let res = JSON.parse(response);
+          alert(res.success);
+          window.location.href = "/admin/category/create";
         }).fail(function(response) {
-          console.log(response);
-          // let res = JSON.parse(response.responseText);
-          // $("#error-message").html(res.name);
+          let res = JSON.parse(response.responseText);
+          $("#sub-error-message").html(res.name);
         });
       }
   </script>
