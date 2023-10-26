@@ -13,5 +13,6 @@ $router->map("POST","/admin/category/create","App\Controllers\CategoryController
 $router->map("GET","/admin/category/[i:id]/delete","App\Controllers\CategoryController@delete","Category Delete");
 $router->map("POST","/admin/category/update","App\Controllers\CategoryController@update","Category Update");
 $router->map("POST","/admin/subcategory/create","App\Controllers\SubCategoryController@create","Sub Category Create");
+$router->map("POST","/admin/subcategory/update","App\Controllers\SubCategoryController@update","Sub Category Update");
 
 new RouteDispatcher($router);

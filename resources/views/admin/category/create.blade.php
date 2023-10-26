@@ -58,9 +58,8 @@
               <li class="list-group-item rounded-0">
                   <a href="/admin/category">{{ $category->name }}</a>
                   <span class="float-right">
-                    <i class="fa fa-plus text-primary" style="cursor: pointer" onclick="showSubCatModel('{{ $category->name }}','{{ $category->id }}')"></i>
-                    <i class="fa fa-edit text-warning mx-2" style="cursor: pointer" onclick="showEditModal('{{ $category->name }}','{{ $category->id }}')"></i>
-                    <a href="/admin/category/{{ $category->id }}/delete">
+                    <i class="fa fa-edit text-warning mx-2" style="cursor: pointer" onclick="showSubEditModal('{{ $category->name }}','{{ $category->id }}')"></i>
+                    <a href="/admin/subcategory/{{ $category->id }}/delete">
                       <i class="fa fa-trash text-danger"></i>
                     </a>
                   </span>
@@ -140,6 +139,36 @@
   </div>
 </div>
 {{-- Sub Category Modal End --}}
+
+{{-- Sub Category Edit Modal Start --}}
+<div class="modal" tabindex="-1" id="sub-edit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name">Category Name</label>
+            <div id="sub-update-error-message" class="py-2 text-danger"></div>
+            <input type="name" class="form-control rounded-0" id="sub-edit-name">
+          </div>
+          <input type="hidden" id="sub-edit-token" value="<?php \App\Classes\CSRFToken::_token() ?>">
+          <input type="hidden" id="sub-edit-id">
+
+          <div class="row justify-content-end no-gutters mt-3">
+              <button class="btn btn-primary" onclick="startSubEdit(event)">Update</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- Sub Category Edit Modal End --}}
 @endsection
 
 @section('script')
@@ -201,6 +230,36 @@
         }).fail(function(response) {
           let res = JSON.parse(response.responseText);
           $("#sub-error-message").html(res.name);
+        });
+      }
+
+      function showSubEditModal(name,id){
+        $("#sub-edit-name").val(name);
+        $("#sub-edit-id").val(id);
+        $("#sub-edit-modal").modal('show');
+      }
+
+      function startSubEdit(e){
+        e.preventDefault();
+        let name = $("#sub-edit-name").val();
+        let id = $("#sub-edit-id").val();
+        let token = $("#sub-edit-token").val();
+
+        $.ajax({
+          type: 'POST',
+          url : '/admin/subcategory/update',
+          data: {
+            name: name,
+            token: token,
+            id: id,
+          }
+        }).done(function(response) {
+          let res = JSON.parse(response);
+          alert(res.update);
+          window.location.href = "/admin/category/create";
+        }).fail(function(response) {
+          let res = JSON.parse(response.responseText);
+          $("#sub-update-error-message").html(res.name);
         });
       }
   </script>

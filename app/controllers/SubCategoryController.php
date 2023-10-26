@@ -42,4 +42,29 @@ class SubCategoryController
             exit;
         }
     }
+
+    public function update(){
+        $post = Request::get('post');
+
+        if(CSRFToken::checkToken($post->token)){
+            $rules = [
+                "name" => ["minLength" => "5", "unique" => "sub_categories"]
+            ];
+            $validator = new ValidateRequest();
+            $validator->checkValidate($post, $rules);
+            if($validator->getErrors()){
+                http_response_code(422);
+                echo json_encode($validator->getErrors());
+                exit;
+            }else{
+                SubCategory::where('id', $post->id)->update(['name' => $post->name]);
+                echo json_encode(["update" => "Sub Category Updated Successfully!"]);
+                exit;
+            }
+        }else{
+            http_response_code(422);
+            echo json_encode(["error" => "Token Miss Match Exception"]);
+            exit;
+        }
+    }
 }
