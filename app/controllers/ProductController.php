@@ -2,9 +2,13 @@
 
 namespace App\Controllers;
 
+use App\Models\Product;
 use App\Classes\Request;
+use App\Classes\Session;
 use App\Models\Category;
+use App\Classes\Redirect;
 use App\Classes\CSRFToken;
+use App\Classes\UploadFile;
 use App\Models\SubCategory;
 use App\Classes\ValidateRequest;
 
@@ -42,13 +46,43 @@ class ProductController
                 $sub_categories = SubCategory::all();
                 view("admin/product/create", compact("categories","sub_categories","errors"));
             }else{
-                $success = "Good To Go";
-                $categories = Category::all();
-                $sub_categories = SubCategory::all();
-                view("admin/product/create", compact("categories","sub_categories","success"));
+                if(!empty($file->file->name)){
+                    $uploadFile = new UploadFile();
+                    if($uploadFile->move($file)){
+                        $path = $uploadFile->getPath();
+                        $product = new Product();
+                        $product->name = $post->name;
+                        $product->price = $post->price;
+                        $product->cat_id = $post->cat_id;
+                        $product->sub_cat_id = $post->sub_cat_id;
+                        $product->image = $path;
+                        $product->description = $post->description;
+
+                        if($product->save()){
+                            $products = Product::all();
+                            Session::flash("product_insert_success","Product Successfully Created!");
+                            Redirect::to('/admin/product',compact('products'));
+                        }else{
+                            $errors = ["Problem Insert Product To Database"];
+                            $categories = Category::all();
+                            $sub_categories = SubCategory::all();
+                            view('admin/product/create',compact('categories','sub_categories','errors'));
+                        }
+                    }else{
+                        $errors = ["Token Miss Match Error!"];
+                        $categories = Category::all();
+                        $sub_categories = SubCategory::all();
+                        view('admin/product/create',compact('categories','sub_categories','errors'));
+                    }
+                }else{
+                    $errors = ["Please Check Picture Size And Type!"];
+                    $categories = Category::all();
+                    $sub_categories = SubCategory::all();
+                    view('admin/product/create',compact('categories','sub_categories','errors'));
+                }
             }
         }else{
-            $errors = ["Token Miss Match Error!"];
+            $errors = ["Please Support Image File!"];
             $categories = Category::all();
             $sub_categories = SubCategory::all();
             view('admin/product/create',compact('categories','sub_categories','errors'));
