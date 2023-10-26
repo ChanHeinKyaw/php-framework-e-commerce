@@ -27,9 +27,11 @@ class CategoryController
             $validator = new ValidateRequest();
             $validator->checkValidate($post, $rules);
             if($validator->hasError()){
-                $categories = Category::all();
+                $datas = Category::all()->count();
+                list($categories, $pages) = paginate(2, $datas, new Category());
+                $categories = json_decode(json_encode($categories));
                 $errors = $validator->getErrors();
-                view('admin/category/create',compact('categories', 'errors'));
+                view('admin/category/create',compact('categories', 'errors', 'pages'));
             }else{
                 $slug = slug($post->name);
                 $con = Category::create([
@@ -38,9 +40,11 @@ class CategoryController
                 ]);
 
                 if($con){
-                    $categories = Category::all();
+                    $datas = Category::all()->count();
+                    list($categories, $pages) = paginate(2, $datas, new Category());
+                    $categories = json_decode(json_encode($categories));
                     $success = "Category Created Successfully!";
-                    view('admin/category/create',compact('categories','success'));
+                    view('admin/category/create',compact('categories','success', 'pages'));
                 }else{
                     echo "Category Created Fail!";
                 }
