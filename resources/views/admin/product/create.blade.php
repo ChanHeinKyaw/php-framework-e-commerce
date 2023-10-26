@@ -7,7 +7,8 @@
                 @include('layout.admin_sidebar')
             </div>
             <div class="col-md-8">
-                <form class="table-bordered p-5" autocomplete="off">
+                @include("layout.report_message")
+                <form action="/admin/product" class="table-bordered p-5" autocomplete="off" method="POST" enctype="multipart/form-data">
                     <h3 class="text-center text-info">Create Product</h3>
                     <div class="row">
                         <div class="col-md-6">
@@ -28,11 +29,9 @@
                             <div class="form-group">
                                 <label for="cat_id">Category</label>
                                 <select name="cat_id" id="cat_id" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -40,11 +39,9 @@
                             <div class="form-group">
                                 <label for="sub_cat_id">Sub Category</label>
                                 <select name="sub_cat_id" id="sub_cat_id" class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                    @foreach($sub_categories as $sub_cat)
+                                        <option value="{{ $sub_cat->id }}">{{ $sub_cat->name }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
@@ -59,6 +56,7 @@
                         <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                     </div>
 
+                    <input type="hidden" name="token" value="<?php \App\Classes\CSRFToken::_token() ?>">
                     <div class="row d-flex justify-content-between no-gutters">
                         <button class="btn btn-outline-secondary">Cancel</button>
                         <button class="btn btn-outline-primary">Submit</button>
