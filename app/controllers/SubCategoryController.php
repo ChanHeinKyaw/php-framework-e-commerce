@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Classes\Request;
+use App\Classes\Session;
+use App\Classes\Redirect;
 use App\Classes\CSRFToken;
 use App\Models\SubCategory;
 use App\Classes\ValidateRequest;
@@ -65,6 +67,18 @@ class SubCategoryController
             http_response_code(422);
             echo json_encode(["error" => "Token Miss Match Exception"]);
             exit;
+        }
+    }
+
+    public function delete($id){
+        $con = SubCategory::destroy($id);
+
+        if($con){
+            Session::flash('delete_success', 'Sub Category Delete Successfully!');
+            Redirect::to('/admin/category/create');
+        }else{
+            Session::flash('delete_fail', 'Sub Category Delete Fail!');
+            Redirect::to('/admin/category/create');
         }
     }
 }
