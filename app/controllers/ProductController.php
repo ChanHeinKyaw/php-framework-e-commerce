@@ -15,7 +15,8 @@ use App\Classes\ValidateRequest;
 class ProductController
 {
     public function index(){
-        view('admin/product/index');
+        $products = Product::all();
+        view('admin/product/index', compact('products'));
     }
 
     public function create(){

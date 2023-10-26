@@ -45,7 +45,7 @@ class UploadFile
                 if(!is_dir($path)){
                     mkdir($path);
                 }
-                $this->path = URL_ROOT . "public/assets/uploads/" . $this->getName();
+                $this->path = URL_ROOT . "assets/uploads/" . $this->getName();
                 $file_path = $path . $this->getName();
                 return move_uploaded_file($file->file->tmp_name, $file_path);
             }else{
