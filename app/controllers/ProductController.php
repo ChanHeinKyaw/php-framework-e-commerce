@@ -156,6 +156,18 @@ class ProductController
         }
     }
 
+    public function delete($id){
+        $con = Product::destroy($id);
+
+        if($con){
+            Session::flash('delete_success', 'Product Delete Successfully!');
+            Redirect::to('/admin/product');
+        }else{
+            Session::flash('delete_fail', 'Product Delete Fail!');
+            Redirect::to('/admin/product');
+        }
+    }
+
 }
 
     

@@ -10,6 +10,12 @@
                 @if(App\Classes\Session::has("product_insert_success"))
                     <?php App\Classes\Session::flash("product_insert_success") ?>
                 @endif
+                @if(App\Classes\Session::has("delete_success"))
+                    <?php App\Classes\Session::flash("delete_success") ?>
+                @endif
+                @if(App\Classes\Session::has("delete_fail"))
+                    <?php App\Classes\Session::flash("delete_fail") ?>
+                @endif
                 {{-- Table Start --}}
                     <table class="table table-bordered text-center">
                         <thead>
@@ -32,7 +38,9 @@
                                         <a href="/admin/product/{{ $product->id }}/edit">
                                             <i class="fa fa-edit text-warning mx-2"></i>
                                         </a>
-                                        <i class="fa fa-trash text-danger"></i>
+                                        <a href="/admin/product/{{ $product->id }}/delete">
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
