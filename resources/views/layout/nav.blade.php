@@ -19,7 +19,7 @@
             <li class="nav-item">
                 <a class="nav-link text-white" style="cursor: pointer" onclick="goToCartPage()">
                   Cart
-                  <span class="badge badge-danger badge-fill" style="position: relative; top: -10px; left: -5px;">0</span>
+                  <span class="badge badge-danger badge-fill" style="position: relative; top: -10px; left: -5px;" id="cart-count">0</span>
                 </a>
             </li>
             <li class="nav-item dropdown">
@@ -37,11 +37,3 @@
         </div>
       </nav>
 </div>
-
-@section('script')
-  <script>
-    function goToCartPage(){
-      alert(123);
-    }
-  </script>
-@endsection

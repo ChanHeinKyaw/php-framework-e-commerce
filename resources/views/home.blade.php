@@ -19,7 +19,7 @@
                                     <i class="fa fa-eye"></i>
                                 </button>
                                 <span>${{ $feature_product->price }}</span>
-                                <button class="btn btn-info btn-sm">
+                                <button class="btn btn-info btn-sm" onclick="addToCart('{{ $feature_product->id }}')">
                                     <i class="fa fa-shopping-cart"></i>
                                 </button>
                             </div>
@@ -46,7 +46,7 @@
                                     <i class="fa fa-eye"></i>
                                 </button>
                                 <span>${{ $product->price }}</span>
-                                <button class="btn btn-info btn-sm">
+                                <button class="btn btn-info btn-sm" onclick="addToCart('{{ $product->id }}')">
                                     <i class="fa fa-shopping-cart"></i>
                                 </button>
                             </div>
@@ -59,4 +59,39 @@
             {!! $pages !!}
         </div>
     </div>
+@endsection
+
+@section('script')
+  <script>
+    function goToCartPage(){
+      clearCartItem();
+    }
+
+    function addToCart(num){
+        var ary = JSON.parse(localStorage.getItem("items"))
+        if(ary == null){
+            var itemAry = [num];
+            localStorage.setItem("items", JSON.stringify(itemAry));
+        }else{
+            let con = ary.indexOf(num);
+            
+            if(con == -1){
+                ary.push(num);
+                localStorage.setItem("items", JSON.stringify(ary));
+            }
+        }
+
+        $("#cart-count").html(getCartItem().length);
+    }
+
+    function getCartItem(){
+        let ary = JSON.parse(localStorage.getItem("items"));
+        return ary;
+    }
+
+    function clearCartItem(){
+        localStorage.removeItem("items");
+    }
+
+  </script>
 @endsection
