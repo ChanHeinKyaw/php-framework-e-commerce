@@ -17,7 +17,7 @@ $router->map("POST","/admin/subcategory/update","App\Controllers\SubCategoryCont
 $router->map("GET","/admin/subcategory/[i:id]/delete","App\Controllers\SubCategoryController@delete","Sub Category Delete");
 $router->map("GET","/admin/product","App\Controllers\ProductController@index","Product Index");
 $router->map("GET","/admin/product/create","App\Controllers\ProductController@create","Product Create");
-$router->map("GET","/admin/product/edit","App\Controllers\ProductController@edit","Product Edit");
+$router->map("GET","/admin/product/[i:id]/edit","App\Controllers\ProductController@edit","Product Edit");
 $router->map("POST","/admin/product","App\Controllers\ProductController@store","Product Store");
 
 new RouteDispatcher($router);

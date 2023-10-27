@@ -27,8 +27,12 @@ class ProductController
         view('admin/product/create',compact('categories','sub_categories'));
     }
 
-    public function edit(){
-        view('admin/product/edit');
+    public function edit($id){
+        $product = Product::where('id',$id)->first();
+        $categories = Category::all();
+        $sub_categories = SubCategory::all();
+
+        view('admin/product/edit',compact('product','categories','sub_categories'));
     }
 
     public function store(){
@@ -91,4 +95,5 @@ class ProductController
             view('admin/product/create',compact('categories','sub_categories','errors'));
         }
     }
+
 }

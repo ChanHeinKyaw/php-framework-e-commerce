@@ -29,7 +29,9 @@
                                     <td>{{ $product->name }}</td>
                                     <td>{{ $product->price }}</td>
                                     <td>
-                                        <i class="fa fa-edit text-warning mx-2"></i>
+                                        <a href="/admin/product/{{ $product->id }}/edit">
+                                            <i class="fa fa-edit text-warning mx-2"></i>
+                                        </a>
                                         <i class="fa fa-trash text-danger"></i>
                                     </td>
                                 </tr>
