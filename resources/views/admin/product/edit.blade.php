@@ -8,7 +8,10 @@
             </div>
             <div class="col-md-8">
                 @include("layout.report_message")
-                <form action="/admin/product" class="table-bordered p-5" autocomplete="off" method="POST" enctype="multipart/form-data">
+                @if(App\Classes\Session::has("product_update_success"))
+                    <?php App\Classes\Session::flash("product_update_success") ?>
+                @endif
+                <form action="/admin/product/{{ $product->id }}/edit" class="table-bordered p-5" autocomplete="off" method="POST" enctype="multipart/form-data">
                     <h3 class="text-center text-info">Edit Product</h3>
                     <div class="row">
                         <div class="col-md-6">

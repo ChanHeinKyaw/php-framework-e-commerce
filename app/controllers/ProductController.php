@@ -14,6 +14,7 @@ use App\Classes\ValidateRequest;
 
 class ProductController
 {
+    protected $path;
     public function index(){
         $datas = Product::all()->count();
         list($products, $pages) = paginate(4, $datas, new Product());
@@ -96,4 +97,65 @@ class ProductController
         }
     }
 
+    public function update($id){
+        $post = Request::get('post');
+        $file = Request::get('file');
+
+
+        if(CSRFToken::checkToken($post->token)){
+            $rules = [
+                "name" => ["required" => true, "unique" => "products", "minLength" => "5"],
+                "description" => ["required" => true, "minLength" => "20"]
+            ];
+
+            $validator = new ValidateRequest();
+            $validator->checkValidate($post, $rules);
+            if($validator->hasError()){
+                $errors = $validator->getErrors();
+                $categories = Category::all();
+                $sub_categories = SubCategory::all();
+                $product = Product::where('id',$id)->first();
+                view("admin/product/edit", compact("categories","sub_categories","errors","product"));
+            }else{
+                if(!empty($file->file->name)){
+                    $uploadFile = new UploadFile();
+                    $uploadFile->move($file);
+                    $this->path = $uploadFile->getPath();
+                }else{
+                    $this->path = $post->old_image;
+                }
+                $product = Product::where('id',$id)->first();
+                $product->name = $post->name;
+                $product->price = $post->price;
+                $product->cat_id = $post->cat_id;
+                $product->sub_cat_id = $post->sub_cat_id;
+                $product->image = $this->path;
+                $product->description = $post->description;
+
+                if($product->update()){
+                    Session::flash("product_update_success","Product Successfully Updated!");
+                    $categories = Category::all();
+                    $sub_categories = SubCategory::all();
+                    $product = Product::where('id',$id)->first();
+                    view("admin/product/edit", compact("categories","sub_categories","product"));
+                }else{
+                    $errors = ["Problem Update Product To Database"];
+                    $categories = Category::all();
+                    $sub_categories = SubCategory::all();
+                    $product = Product::where('id',$id)->first();
+                    view('admin/product/edit',compact('categories','sub_categories','errors','product'));
+                }
+
+            }
+        }else{
+            $errors = ["Please Support Image File!"];
+            $categories = Category::all();
+            $sub_categories = SubCategory::all();
+            $product = Product::where('id',$id)->first();
+            view('admin/product/edit',compact('categories','sub_categories','errors','product'));
+        }
+    }
+
 }
+
+    
