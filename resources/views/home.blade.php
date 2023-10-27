@@ -64,7 +64,18 @@
 @section('script')
   <script>
     function goToCartPage(){
-      clearCartItem();
+        $.ajax({
+          type: 'POST',
+          url : '/cart',
+          data: {
+            cart: getCartItem()
+          }
+        }).done(function(response) {
+          clearCartItem();
+          window.location.href = "/cart";
+        }).fail(function(response) {
+          console.log(response);
+        });
     }
 
     function addToCart(num){
