@@ -17,7 +17,10 @@
               <a class="nav-link text-white" href="/admin">Admin Panel</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">Pricing</a>
+                <a class="nav-link text-white" style="cursor: pointer" onclick="goToCartPage()">
+                  Cart
+                  <span class="badge badge-danger badge-fill" style="position: relative; top: -10px; left: -5px;">0</span>
+                </a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -34,3 +37,11 @@
         </div>
       </nav>
 </div>
+
+@section('script')
+  <script>
+    function goToCartPage(){
+      alert(123);
+    }
+  </script>
+@endsection
